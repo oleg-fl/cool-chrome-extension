@@ -1,0 +1,79 @@
+@use postcss-simple-vars;
+@use postcss-media-minmax;
+@use postcss-nested;
+
+$bp: 255px;
+
+.ext_download_button {
+  display: inline-block;
+  padding: 12px 12px 10px;
+  border: 0;
+  border-radius: 3px;
+  background: #bf4d28;
+  text-decoration: none;
+  transition: all 1.2s ease-in-out;
+  content: url("chrome-extension://__MSG_@@extension_id__/images/download.png");
+  &:hover {
+    animation: pulse 0.2s 2 both;
+  }
+  
+  &.loading {
+    i {
+      animation: loading 2s infinite linear;
+      
+      &::after {
+        content: "\f1ce";
+      }        
+    }
+  }
+  
+  &.success {
+    
+  }
+}
+
+@keyframes loading {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+  }
+}
+
+@keyframes change-icon {
+  0% {
+    color: transparent;
+  }
+  
+  100% {
+    color: #fff;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+  a {
+    color: #bf4d28;
+    text-decoration: none;
+    transition: all 0.7s;
+    
+    &:hover, &:focus {
+      color: #80bca3;
+    }
+  }
+}

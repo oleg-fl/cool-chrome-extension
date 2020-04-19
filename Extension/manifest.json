@@ -1,0 +1,26 @@
+{
+  "name": "Some Downloader",
+  "version": "1.0",
+  "description": "Not virus",
+  "permissions": [
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.example.com/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "css": [
+        "button.css",
+        "font-awesome.min.css"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}
