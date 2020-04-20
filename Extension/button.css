@@ -1,79 +1,111 @@
-@use postcss-simple-vars;
-@use postcss-media-minmax;
-@use postcss-nested;
-
-$bp: 255px;
-
-.ext_download_button {
-  display: inline-block;
-  padding: 12px 12px 10px;
-  border: 0;
-  border-radius: 3px;
-  background: #bf4d28;
-  text-decoration: none;
-  transition: all 1.2s ease-in-out;
-  content: url("chrome-extension://__MSG_@@extension_id__/images/download.png");
-  &:hover {
-    animation: pulse 0.2s 2 both;
-  }
-  
-  &.loading {
-    i {
-      animation: loading 2s infinite linear;
-      
-      &::after {
-        content: "\f1ce";
-      }        
-    }
-  }
-  
-  &.success {
-    
-  }
+.btn-circle-download {
+  position: relative;
+  height: 48px;
+  width: 48px;
+  margin: auto;
+  padding: 0px;
+  border-radius: 100%;
+  background: #E8EAED;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.btn-circle-download:after {
+  content: "";
+  position: relative;
+  display: block;
+  width: 200%;
+  height: 100%;
+  background-image: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+  transform: translateX(-100%);
+}
+.btn-circle-download svg {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+.btn-circle-download svg#border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  stroke: none;
+  stroke-dasharray: 144;
+  stroke-dashoffset: 144;
+  transition: all 0.9s linear;
+}
+.btn-circle-download svg#arrow {
+  position: absolute;
+  top: 14px;
+  left: 17px;
+  stroke: #9098A9;
+  transition: all 0.2s ease;
+}
+.btn-circle-download svg#check {
+  position: absolute;
+  top: 17px;
+  left: 13px;
+  stroke: white;
+  transform: scale(0);
+}
+.btn-circle-download:hover {
+  background: rgba(0, 119, 255, 0.2);
+}
+.btn-circle-download:hover #arrow path,
+.btn-circle-download:hover #arrow polyline {
+  stroke: #0077FF;
+}
+.btn-circle-download.load {
+  background: rgba(0, 119, 255, 0.2);
+}
+.btn-circle-download.load #arrow path,
+.btn-circle-download.load #arrow polyline {
+  stroke: #0077FF;
+}
+.btn-circle-download.load #border {
+  stroke: #0077FF;
+  stroke-dasharray: 144;
+  stroke-dashoffset: 0;
+}
+.btn-circle-download.done {
+  background: #0077FF;
+  animation: rubberBand 0.8s;
+}
+.btn-circle-download.done:after {
+  transform: translateX(50%);
+  transition: transform 0.4s ease;
+  transition-delay: 0.7s;
+}
+.btn-circle-download.done #border,
+.btn-circle-download.done #arrow {
+  display: none;
+}
+.btn-circle-download.done #check {
+  transform: scale(1);
+  transition: all 0.2s ease;
+  transition-delay: 0.2s;
 }
 
-@keyframes loading {
-  0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100% {
-      -webkit-transform: rotate(359deg);
-      transform: rotate(359deg);
-  }
-}
-
-@keyframes change-icon {
-  0% {
-    color: transparent;
-  }
-  
-  100% {
-    color: #fff;
-  }
-}
-
-@keyframes pulse {
+@keyframes rubberBand {
   from {
-    transform: scale3d(1, 1, 1);
+    transform: scale(1, 1, 1);
   }
-
+  30% {
+    transform: scale3d(1.15, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.15, 1);
+  }
   50% {
-    transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.1, 0.85, 1);
   }
-
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
   to {
     transform: scale3d(1, 1, 1);
-  }
-}
-
-  a {
-    color: #bf4d28;
-    text-decoration: none;
-    transition: all 0.7s;
-    
-    &:hover, &:focus {
-      color: #80bca3;
-    }
   }
 }

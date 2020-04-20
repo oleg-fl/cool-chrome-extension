@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://www.example.com/*"
+        "http://www.example.com/*","https://www.youtube.com/*"
       ],
       "js": [
         "contentScript.js"
